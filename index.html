@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Можноси в туалети?</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #e0f0ff, #b8d8f8, #d0e8ff);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+  .card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px 36px 36px;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(100, 160, 220, 0.25);
+    max-width: 420px;
+    width: 90%;
+  }
+  .card img {
+    width: 260px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+  }
+  .card h1 {
+    font-size: 26px;
+    color: #3a7bc8;
+    margin-bottom: 28px;
+  }
+  .buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+  }
+  .btn {
+    padding: 14px 40px;
+    border: none;
+    border-radius: 14px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn:hover { transform: scale(1.05); }
+  .btn-yes {
+    background: #5ba3e6;
+    color: white;
+    box-shadow: 0 4px 14px rgba(91, 163, 230, 0.4);
+  }
+  .btn-no {
+    background: #c4ddf5;
+    color: #3a7bc8;
+    box-shadow: 0 4px 14px rgba(196, 221, 245, 0.5);
+  }
+
+  /* Modal */
+  .overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.35);
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  .overlay.active { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 28px;
+    text-align: center;
+    max-width: 340px;
+    width: 85%;
+    box-shadow: 0 12px 48px rgba(100, 160, 220, 0.35);
+    animation: pop 0.3s ease;
+  }
+  @keyframes pop {
+    0% { transform: scale(0.7); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .modal p {
+    font-size: 22px;
+    color: #3a7bc8;
+    margin-bottom: 20px;
+  }
+  .modal .btn-ok {
+    padding: 10px 32px;
+    background: #5ba3e6;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .yay {
+    display: none;
+    font-size: 28px;
+    color: #3a7bc8;
+    margin-top: 24px;
+    animation: pop 0.3s ease;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <img src="https://media1.tenor.com/m/0rPjitCLTt8AAAAC/cute-kitten.gif" alt="cute kitten">
+  <h1>Можноси в туалети?(</h1>
+  <div class="buttons">
+    <button class="btn btn-yes" onclick="sayYes()">Да</button>
+    <button class="btn btn-no" onclick="sayNo()">Нет</button>
+  </div>
+  <div class="yay" id="yay">Ураааа! Спасибо!!! &hearts;</div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <p id="modal-text"></p>
+    <button class="btn-ok" onclick="closeModal()">Ок...</button>
+  </div>
+</div>
+
+<script>
+const pleas = [
+  "Плииииз(((",
+  "Ну пожааааалуйста((((",
+  "Я буду хорошим!!!",
+  "Ну кисааа(((",
+  "Очень надо((( плиииз",
+  "Я больше не буду... ну плиииз(",
+  "Ну капельку можно?((((",
+  "Я обещаю быстро!!!",
+  "Ну реально очень надо((",
+  "Последний разочек... плииииз(",
+  "Киса, я куплю тебе старбакс!!!",
+  "Киса, любой старбакс на твой выбор!!",
+  "Буду паинькой, честно-честно!",
+  "Мяяяяу((( ну пожалуйста(",
+  "Киса, ты же добрая... ну плиииз!!",
+  "Старбакс + туалет = идеальный день!",
+];
+let noCount = 0;
+
+function sayNo() {
+  const text = pleas[noCount % pleas.length];
+  noCount++;
+  document.getElementById('modal-text').textContent = text;
+  document.getElementById('overlay').classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('active');
+}
+
+function sayYes() {
+  document.querySelector('.buttons').style.display = 'none';
+  document.getElementById('yay').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
